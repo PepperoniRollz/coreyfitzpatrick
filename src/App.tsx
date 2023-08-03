@@ -1,13 +1,13 @@
 import "./App.css";
 import Header from "./components/Header";
-import Paragraph from "./components/Paragraph";
 import Footer from "./components/Footer";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" background-color="#D68840">
       <Header />
-      <Paragraph />
+      <Outlet />
       <Footer />
     </div>
   );

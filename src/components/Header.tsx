@@ -8,8 +8,38 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import CasinoIcon from "@mui/icons-material/Casino";
+import { Link as RouterLink, createBrowserRouter } from "react-router-dom";
+import AboutMe from "./routes/AboutMe";
+import Resume from "./routes/Resume";
+import Poker from "./routes/Poker";
+import Contact from "./routes/Contact";
+import Projects from "./routes/Projects";
+import App from "../App";
 
-const pages = ["Home", "Projects", "Poker", "Resume"];
+const pages = ["About Me", "Projects", "Poker", "Resume", "Contact"];
+
+const router = createBrowserRouter([
+  {
+    path: "/aboutme",
+    element: <AboutMe />,
+  },
+  {
+    path: "resume",
+    element: <Resume />,
+  },
+  {
+    path: "poker",
+    element: <Poker />,
+  },
+  {
+    path: "contact",
+    element: <Contact />,
+  },
+  {
+    path: "projects",
+    element: <Projects />,
+  },
+]);
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -21,7 +51,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky" style={{ background: "#087E8B" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <CasinoIcon
@@ -51,7 +81,6 @@ function Header() {
               </MenuItem>
             ))}
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -70,15 +99,48 @@ function Header() {
             Corey Fitzpatrick
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              component={RouterLink}
+              to="/aboutme"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              About Me
+            </Button>
+
+            <Button
+              component={RouterLink}
+              to="/projects"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              projects
+            </Button>
+
+            <Button
+              component={RouterLink}
+              to="/resume"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              resume
+            </Button>
+            <Button
+              component={RouterLink}
+              to="/contact"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              contact
+            </Button>
+            {/* <Button
+              component={RouterLink}
+              to="/poker"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              poker
+            </Button> */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}></Box>
