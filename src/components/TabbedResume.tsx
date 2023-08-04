@@ -41,7 +41,7 @@ export default () => (
               </ListItem>
               <ListItem disablePadding>
                 <ListItem>
-                  <ListItemText primary="2010 WVJC - Assosicates - Business Admin" />
+                  <ListItemText primary="2010 WVJC - Assosicates - Business Administration" />
                 </ListItem>
               </ListItem>
               <ListItem disablePadding>
