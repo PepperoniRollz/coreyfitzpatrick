@@ -1,23 +1,31 @@
-import App from "../../App";
 import { createBrowserRouter } from "react-router-dom";
 import Contact from "../../components/routes/Contact";
 import Poker from "../../components/routes/Poker";
-import Resume from "../../components/routes/Resume";
-import AboutMe from "../../components/routes/AboutMe";
+import AboutMe from "./AboutMe";
 import Projects from "../../components/routes/Projects";
+import TabbedResume from "../TabbedResume";
+import Layout from "../Layout";
+import Home from "./Home";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
+    element: <Layout />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "contact",
         element: <Contact />,
       },
       {
+        path: "aboutme",
+        element: <AboutMe />,
+      },
+      {
         path: "resume",
-        element: <Resume />,
+        element: <TabbedResume />,
       },
       {
         path: "poker",
@@ -30,10 +38,6 @@ const router = createBrowserRouter([
       {
         path: "projects",
         element: <Projects />,
-      },
-      {
-        path: "aboutme",
-        element: <AboutMe />,
       },
     ],
   },

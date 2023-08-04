@@ -1,8 +1,20 @@
+import { Box, Grid } from "@mui/material";
+import ProjectCard from "../ProjectCard";
+
 function Projects(): JSX.Element {
   return (
-    <div>
-      <h1>Projects</h1>
-    </div>
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Box justifyContent={"center"}>
+        <ProjectCard />
+        <ProjectCard />
+      </Box>
+    </Grid>
   );
 }
 

@@ -6,22 +6,20 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import CasinoIcon from "@mui/icons-material/Casino";
 import { Link as RouterLink, createBrowserRouter } from "react-router-dom";
-import AboutMe from "./routes/AboutMe";
+import Home from "./routes/Home";
 import Resume from "./routes/Resume";
 import Poker from "./routes/Poker";
 import Contact from "./routes/Contact";
 import Projects from "./routes/Projects";
-import App from "../App";
 
 const pages = ["About Me", "Projects", "Poker", "Resume", "Contact"];
 
 const router = createBrowserRouter([
   {
-    path: "/aboutme",
-    element: <AboutMe />,
+    path: "/",
+    element: <Home />,
   },
   {
     path: "resume",
@@ -56,6 +54,7 @@ function Header() {
         <Toolbar disableGutters>
           <CasinoIcon
             sx={{ fontSize: 60, display: { xs: "none", md: "flex" }, mr: 1 }}
+            to="/"
           />
           <Typography
             variant="h6"
@@ -133,14 +132,6 @@ function Header() {
             >
               contact
             </Button>
-            {/* <Button
-              component={RouterLink}
-              to="/poker"
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              poker
-            </Button> */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}></Box>
