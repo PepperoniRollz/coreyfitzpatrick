@@ -16,7 +16,7 @@ const ContactMe: React.FC = () => {
   return (
     <Container maxWidth="sm">
       <Box mt={5} mb={3}>
-        <Typography variant="h4">Contact Me</Typography>
+        <Typography variant="h4">Obligatory Contact Me Page</Typography>
       </Box>
       <form onSubmit={handleSubmit}>
         <Box mb={2}>

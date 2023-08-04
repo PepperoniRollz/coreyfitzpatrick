@@ -84,6 +84,11 @@ export default () => (
                   <ListItemText primary="2008-2014 Aegis Communications - Trainer/Supervisor" />
                 </ListItem>
               </ListItem>
+              <ListItem disablePadding>
+                <ListItem>
+                  <ListItemText primary="2005-2008 - Shop N Save - Customer Service Technician (OK I was a bagger...I bagged groceries...professionally)" />
+                </ListItem>
+              </ListItem>
             </List>
             <Divider />
           </Box>
