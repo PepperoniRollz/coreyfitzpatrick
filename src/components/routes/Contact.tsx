@@ -6,10 +6,12 @@ const ContactMe: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   // Function to handle form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitted(true);
     // You can perform additional logic here, such as sending the data to a server or displaying a success message.
   };
 
@@ -54,6 +56,9 @@ const ContactMe: React.FC = () => {
         <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
+        {submitted && (
+          <p>Just kidding. Just send me an email @ cfitzpatrick616@gmail.com</p>
+        )}
       </form>
     </Container>
   );
