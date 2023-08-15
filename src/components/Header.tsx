@@ -18,7 +18,7 @@ const pages = ["About Me", "Projects", "Poker", "Resume", "Contact"];
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "coreyfitzpatrick",
     element: <Home />,
   },
   {
@@ -54,13 +54,13 @@ function Header() {
         <Toolbar disableGutters>
           <CasinoIcon
             sx={{ fontSize: 60, display: { xs: "none", md: "flex" }, mr: 1 }}
-            to="/"
+            to="coreyfitzpatrick"
           />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="coreyfitzpatrick"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
