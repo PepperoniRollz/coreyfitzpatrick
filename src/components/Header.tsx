@@ -54,13 +54,13 @@ function Header() {
         <Toolbar disableGutters>
           <CasinoIcon
             sx={{ fontSize: 60, display: { xs: "none", md: "flex" }, mr: 1 }}
-            to="coreyfitzpatrick"
+            to="/coreyfitzpatrick"
           />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="coreyfitzpatrick"
+            href="/coreyfitzpatrick"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
