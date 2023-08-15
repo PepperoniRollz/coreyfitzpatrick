@@ -1,11 +1,12 @@
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 
-const DownloadPDF = () => {
+import pdf from "../../pdfs/fitzpatrickresume.pdf";
+const Resume = () => {
   return (
     <div>
       <div>
         <PictureAsPdfIcon sx={{ fontSize: 25 }} />
-        <a href="/pdfs/CoreyFitzpatrickResume.pdf" download>
+        <a href={pdf} download>
           Download my resume! (Totally not a virus!)
         </a>
       </div>
@@ -13,4 +14,4 @@ const DownloadPDF = () => {
   );
 };
 
-export default DownloadPDF;
+export default Resume;
