@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Contact from "../../components/routes/Contact";
-import Poker from "../../components/routes/Poker";
 import AboutMe from "./AboutMe";
 import Projects from "../../components/routes/Projects";
 import TabbedResume from "../TabbedResume";
@@ -26,10 +25,6 @@ const router = createBrowserRouter([
       {
         path: "resume",
         element: <TabbedResume />,
-      },
-      {
-        path: "poker",
-        element: <Poker />,
       },
       {
         path: "contact",

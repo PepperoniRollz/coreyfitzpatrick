@@ -5,9 +5,6 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { IconButton } from "@mui/material";
 
-const pages = ["Home", "Projects", "Poker", "Resume"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
 function Footer() {
   return (
     <AppBar

@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,47 +6,11 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import CasinoIcon from "@mui/icons-material/Casino";
-import { Link as RouterLink, createBrowserRouter } from "react-router-dom";
-import Home from "./routes/Home";
-import Resume from "./routes/Resume";
-import Poker from "./routes/Poker";
-import Contact from "./routes/Contact";
-import Projects from "./routes/Projects";
+import { Link as RouterLink } from "react-router-dom";
 
-const pages = ["About Me", "Projects", "Poker", "Resume", "Contact"];
-
-const router = createBrowserRouter([
-  {
-    path: "coreyfitzpatrick",
-    element: <Home />,
-  },
-  {
-    path: "resume",
-    element: <Resume />,
-  },
-  {
-    path: "poker",
-    element: <Poker />,
-  },
-  {
-    path: "contact",
-    element: <Contact />,
-  },
-  {
-    path: "projects",
-    element: <Projects />,
-  },
-]);
+const pages = ["About Me", "Projects", "Resume", "Contact"];
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   return (
     <AppBar position="sticky" style={{ background: "#087E8B" }}>
       <Container maxWidth="xl">
@@ -75,7 +38,7 @@ function Header() {
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
+              <MenuItem key={page}>
                 <Typography textAlign="center">{page}</Typography>
               </MenuItem>
             ))}
@@ -101,7 +64,6 @@ function Header() {
             <Button
               component={RouterLink}
               to="/aboutme"
-              onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               About Me
@@ -110,7 +72,6 @@ function Header() {
             <Button
               component={RouterLink}
               to="/projects"
-              onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               projects
@@ -119,7 +80,6 @@ function Header() {
             <Button
               component={RouterLink}
               to="/resume"
-              onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               resume
@@ -127,7 +87,6 @@ function Header() {
             <Button
               component={RouterLink}
               to="/contact"
-              onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               contact
