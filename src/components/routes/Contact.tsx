@@ -4,7 +4,6 @@ import React, { useState } from "react";
 const ContactMe: React.FC = () => {
   // State variables to hold form data
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -12,7 +11,6 @@ const ContactMe: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
-    // You can perform additional logic here, such as sending the data to a server or displaying a success message.
   };
 
   return (
@@ -32,14 +30,7 @@ const ContactMe: React.FC = () => {
           />
         </Box>
         <Box mb={2}>
-          <TextField
-            fullWidth
-            label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            variant="outlined"
-            required
-          />
+          <TextField fullWidth label="Email" variant="outlined" required />
         </Box>
         <Box mb={2}>
           <TextField

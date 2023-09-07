@@ -4,11 +4,8 @@ import Resume from "./routes/Resume";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
 import { Grid } from "@mui/material";
 
 export default () => (
@@ -82,11 +79,6 @@ export default () => (
               <ListItem disablePadding>
                 <ListItem>
                   <ListItemText primary="2008-2014 Aegis Communications - Trainer/Supervisor" />
-                </ListItem>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItem>
-                  <ListItemText primary="2005-2008 - Shop N Save - Customer Service Technician (OK I was a bagger...I bagged groceries...professionally)" />
                 </ListItem>
               </ListItem>
             </List>
