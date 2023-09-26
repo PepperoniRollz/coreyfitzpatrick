@@ -91,6 +91,13 @@ function Header() {
             >
               contact
             </Button>
+            <Button
+              component={RouterLink}
+              to="/poker"
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              poker
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}></Box>

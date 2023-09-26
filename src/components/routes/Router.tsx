@@ -5,6 +5,7 @@ import Projects from "../../components/routes/Projects";
 import TabbedResume from "../TabbedResume";
 import Layout from "../Layout";
 import Home from "./Home";
+import Poker from "./Poker";
 
 const router = createBrowserRouter([
   {
@@ -27,12 +28,12 @@ const router = createBrowserRouter([
         element: <TabbedResume />,
       },
       {
-        path: "contact",
-        element: <Contact />,
-      },
-      {
         path: "projects",
         element: <Projects />,
+      },
+      {
+        path: "poker",
+        element: <Poker />,
       },
     ],
   },
