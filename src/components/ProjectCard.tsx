@@ -3,31 +3,48 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Link } from "react-router-dom";
 
-export default function ProjectCard() {
+type ProjectCardProps = {
+  title: string;
+  description: string;
+  url?: string;
+  img?: string;
+};
+export default function ProjectCard({
+  title,
+  description,
+  url,
+  img,
+}: ProjectCardProps) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, bgcolor: "#75e6da", maxHeight: 750 }}>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image="../images/corey.jpg"
-          alt="green iguana"
-        />
+        {img && (
+          <CardMedia
+            component="img"
+            height="150"
+            image={img}
+            alt="green iguana"
+          />
+        )}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
+        {url && (
+          <Link to={url} style={{ textDecoration: "none" }}>
+            <Button size="small" color="primary">
+              Go See!
+            </Button>
+          </Link>
+        )}
       </CardActions>
     </Card>
   );
