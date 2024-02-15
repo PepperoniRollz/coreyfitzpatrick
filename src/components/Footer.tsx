@@ -11,12 +11,18 @@ function Footer() {
       position="fixed"
       style={{
         background: "#087E8B",
+        height: "55px",
       }}
       color="primary"
       sx={{ top: "auto", bottom: 0 }}
     >
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ justifyContent: "center" }}>
+        <Toolbar
+          disableGutters
+          sx={{
+            justifyContent: "center",
+          }}
+        >
           <IconButton
             href="https://www.linkedin.com/in/corey-fitzpatrick-44b53876/"
             target="_blank"

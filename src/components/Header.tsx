@@ -12,7 +12,7 @@ const pages = ["About Me", "Projects", "Resume", "Contact"];
 
 function Header() {
   return (
-    <AppBar position="sticky" style={{ background: "#087E8B" }}>
+    <AppBar position="sticky" style={{ background: "#05445e" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <CasinoIcon
@@ -84,19 +84,27 @@ function Header() {
             >
               resume
             </Button>
-            <Button
-              component={RouterLink}
-              to="/contact"
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              contact
-            </Button>
+
             <Button
               component={RouterLink}
               to="/poker"
               sx={{ my: 2, color: "white", display: "block" }}
             >
               poker
+            </Button>
+            <Button
+              component={RouterLink}
+              to="/roulette"
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              roulette
+            </Button>
+            <Button
+              component={RouterLink}
+              to="/bittester"
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              bit tester
             </Button>
           </Box>
 

@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { Grid } from "@mui/material";
 
-export default () => (
+const TabbedResume = () => (
   <>
     <Grid
       container
@@ -185,3 +185,5 @@ export default () => (
     </Grid>
   </>
 );
+
+export default TabbedResume;

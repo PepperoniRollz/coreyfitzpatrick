@@ -1,12 +1,13 @@
 import { StringifyOptions } from "querystring";
 import React from "react";
+import playingCardsList from "../utils/svgImporter";
 
-interface CardProps {
-  card: string;
-  front?: boolean;
-  height: string;
-  style: React.CSSProperties;
-}
+// interface CardProps {
+//   card: string;
+//   front?: boolean;
+//   height: string;
+//   style: React.CSSProperties;
+// }
 
 const cardCodes: Map<string, number> = new Map<string, number>([
   ["2c", 1],
@@ -63,17 +64,20 @@ const cardCodes: Map<string, number> = new Map<string, number>([
   ["As", 52],
 ]);
 
-export class Card {
+export default class Card {
   value: number;
+  card: string;
 
   constructor(s: string) {
+    // console.log(s);
+
     this.value = cardCodes.get(s) || 0;
+    this.card = s;
   }
 }
 
 export class CardSet {
   cards: Card[];
-
   constructor(s: string) {
     this.cards = [];
     for (let i = 0; i < s.length; i += 2) {

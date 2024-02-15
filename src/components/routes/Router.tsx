@@ -2,10 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 import Contact from "../../components/routes/Contact";
 import AboutMe from "./AboutMe";
 import Projects from "../../components/routes/Projects";
-import TabbedResume from "../TabbedResume";
 import Layout from "../Layout";
 import Home from "./Home";
 import Poker from "./Poker";
+import Roulette from "./Roulette";
+import Resume from "./Resume";
+import BitTester from "./BitTester";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "resume",
-        element: <TabbedResume />,
+        element: <Resume />,
       },
       {
         path: "projects",
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
       {
         path: "poker",
         element: <Poker />,
+      },
+      {
+        path: "roulette",
+        element: <Roulette />,
+      },
+      {
+        path: "bittester",
+        element: <BitTester />,
       },
     ],
   },
