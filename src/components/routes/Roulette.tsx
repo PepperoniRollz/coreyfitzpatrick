@@ -250,7 +250,7 @@ const Roulette = (): JSX.Element => {
 
   return (
     <>
-      <Grid container spacing={5} paddingTop={"2%"} bgcolor={"#189ab4"}>
+      <Grid container spacing={5} paddingTop={"2%"}>
         <Box sx={{ width: "100%", marginTop: 2, marginX: 50 }}>
           {/* Adjust the margin as needed */}
           <Typography variant="h4" align="left" gutterBottom>

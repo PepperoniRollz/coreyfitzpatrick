@@ -11,7 +11,6 @@ function Projects(): JSX.Element {
         sx={{
           width: "100vw",
           height: "100vh",
-          bgcolor: "#189ab4",
           paddingTop: "2%",
           paddingBottom: "2%",
           overflow: "auto",

@@ -18,7 +18,14 @@ export default function ProjectCard({
   img,
 }: ProjectCardProps) {
   return (
-    <Card sx={{ maxWidth: 345, bgcolor: "#75e6da", maxHeight: 750 }}>
+    <Card
+      sx={{
+        boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)", // Customize shadow
+        maxWidth: 345,
+
+        maxHeight: 750,
+      }}
+    >
       <CardActionArea>
         {img && (
           <CardMedia

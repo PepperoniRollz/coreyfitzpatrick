@@ -5,7 +5,7 @@ import programming from "../../images/programming.png";
 function AboutMe(): JSX.Element {
   return (
     <>
-      <Grid container bgcolor={"#189ab4"} paddingTop={5}>
+      <Grid container paddingTop={5}>
         <Box sx={{ width: "100%", marginBottom: 2, marginX: 50 }}>
           {/* Adjust the margin as needed */}
           <Typography variant="h4" align="left" gutterBottom>

@@ -224,7 +224,6 @@ function Poker() {
         container
         spacing={5}
         paddingTop={"2%"}
-        bgcolor={"#189ab4"}
         height={"100vh"}
         paddingBottom={"2%"}
       >

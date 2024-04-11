@@ -77,13 +77,13 @@ function Header() {
               projects
             </Button>
 
-            <Button
+            {/* <Button
               component={RouterLink}
               to="/resume"
               sx={{ my: 2, color: "white", display: "block" }}
             >
               resume
-            </Button>
+            </Button> */}
 
             <Button
               component={RouterLink}
@@ -101,10 +101,10 @@ function Header() {
             </Button>
             <Button
               component={RouterLink}
-              to="/bittester"
+              to="/randomwalk"
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              bit tester
+              Random Walk
             </Button>
           </Box>
 
