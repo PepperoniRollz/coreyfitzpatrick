@@ -99,13 +99,13 @@ function Header() {
             >
               roulette
             </Button>
-            <Button
+            {/* <Button
               component={RouterLink}
               to="/randomwalk"
               sx={{ my: 2, color: "white", display: "block" }}
             >
               Random Walk
-            </Button>
+            </Button> */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}></Box>
