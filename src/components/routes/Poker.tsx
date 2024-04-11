@@ -135,16 +135,9 @@ function Poker() {
     console.log("players", Players);
     console.log("board", Board);
 
-    fetch("http://localhost:8080/api/equity", {
+    fetch("http://ec2-3-85-15-107.compute-1.amazonaws.com:8080/api/equity", {
       method: "POST",
       body: JSON.stringify({
-        // HoleCards: [
-        //   { Cards: [{ Value: 52 }, { Value: 51 }] },
-        //   { Cards: [{ Value: 19 }, { Value: 23 }] },
-        //   { Cards: [{ Value: 12 }, { Value: 11 }] },
-        // ],
-        // Players: [new CardSet(heroCards), new CardSet(villainCards)],
-        // Board: new CardSet(board),
         Players: Players,
         Board: Board,
       }),
@@ -238,7 +231,7 @@ function Poker() {
           <Grid item xs={12} marginLeft={50} marginRight={50}>
             <Typography variant="body1" align={"left"}>
               An equity calculator for Texas Holdem. Enter player and board/dead
-              cards to evaluate win equity.
+              cards to evaluate win equity. **Temporarily down to AWS costs**
             </Typography>
           </Grid>
         </Box>
