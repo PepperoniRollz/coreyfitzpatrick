@@ -27,8 +27,9 @@ const PlayerFields = ({
       <Grid item xs="auto">
         <Button
           onClick={() => handleClickOpen(index)}
+          variant="outlined"
           size="small"
-          sx={{ color: "blue", minWidth: 44, minHeight: 44 }}
+          sx={{ minWidth: 44, minHeight: 44 }}
         >
           Cards
         </Button>
@@ -36,15 +37,18 @@ const PlayerFields = ({
       <Grid item xs>
         <TextField
           size="small"
-          label={`Player ${index}`}
+          label={`Player ${index + 1}`}
           onChange={onTextChange}
           value={textValue}
           onFocus={onFocus}
           fullWidth
+          placeholder="e.g. AcKh"
         />
       </Grid>
       <Grid item xs="auto">
-        <Typography sx={{ minWidth: 80 }}>{(equity * 100).toFixed(4)}%</Typography>
+        <Typography sx={{ minWidth: 80, fontWeight: equity > 0 ? "bold" : "normal" }}>
+          {equity > 0 ? `${(equity * 100).toFixed(4)}%` : "--"}
+        </Typography>
       </Grid>
     </Grid>
   );

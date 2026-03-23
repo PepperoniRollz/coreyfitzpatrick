@@ -38,6 +38,8 @@ function Poker() {
 
   const [open, setOpen] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState(0);
+  const [numPlayers, setNumPlayers] = useState(2);
+  const [isEvaluating, setIsEvaluating] = useState(false);
   const [playerFieldValues, setPlayerFieldValues] = useState<PlayerFieldData[]>(
     Array.from({ length: 12 }, () => ({ cards: "", equity: 0 }))
   );
@@ -129,6 +131,7 @@ function Poker() {
     return { Players: players, Board: boardCards };
   };
   const handlePost = () => {
+    setIsEvaluating(true);
     const { Players, Board } = convertToCards(
       playerFieldValues.map((p) => p.cards)
     );
@@ -151,6 +154,9 @@ function Poker() {
       })
       .catch(function (error) {
         console.warn("Something went wrong.", error);
+      })
+      .finally(function () {
+        setIsEvaluating(false);
       });
   };
 
@@ -219,7 +225,7 @@ function Poker() {
           <Grid item xs={12} sx={{ marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 }, marginRight: { xs: 2, sm: 4, md: 10, lg: 20 } }}>
             <Typography variant="body1" align={"left"}>
               An equity calculator for Texas Holdem. Enter player and board/dead
-              cards to evaluate win equity. **Temporarily down to AWS costs**
+              cards to evaluate win equity. <strong>Temporarily down due to AWS costs</strong>
             </Typography>
           </Grid>
         </Box>
@@ -235,7 +241,7 @@ function Poker() {
           {/* ================================ Player Fields ================================ */}
 
           <Grid item xs={12} md={8}>
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value, index) => (
+            {Array.from({ length: numPlayers }, (_, index) => (
               <PlayerFields
                 selectedPlayerCards={selectedPlayerCards}
                 handleClickOpen={handleClickOpen}
@@ -247,6 +253,18 @@ function Poker() {
                 equity={playerFieldValues[index].equity}
               />
             ))}
+            <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
+              {numPlayers < 10 && (
+                <Button size="small" onClick={() => setNumPlayers((n) => Math.min(n + 1, 10))}>
+                  + Add Player
+                </Button>
+              )}
+              {numPlayers > 2 && (
+                <Button size="small" color="error" onClick={() => setNumPlayers((n) => Math.max(n - 1, 2))}>
+                  - Remove
+                </Button>
+              )}
+            </Box>
           </Grid>
           <Grid item xs={12} md={4}>
             <Grid container spacing={1} alignItems="center" sx={{ mb: 1 }}>
@@ -303,10 +321,22 @@ function Poker() {
           selectedBoardCards={selectedBoardCards}
           selectedDeadCards={selectedDeadCards}
           handleCardClick={handleCardClick}
+          title={
+            selectedPlayer === 11
+              ? "Select Board Cards"
+              : selectedPlayer === 12
+              ? "Select Dead Cards"
+              : `Select Cards for Player ${selectedPlayer + 1}`
+          }
         />
-        <Grid item xs={12} sx={{ marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 }, marginRight: { xs: 2, sm: 4, md: 10, lg: 20 } }}>
-          <Button variant="contained" onClick={handlePost} sx={{ minHeight: 44 }}>
-            Evaluate
+        <Grid item xs={12} sx={{ marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 }, marginRight: { xs: 2, sm: 4, md: 10, lg: 20 }, textAlign: "center" }}>
+          <Button
+            variant="contained"
+            onClick={handlePost}
+            disabled={isEvaluating}
+            sx={{ minHeight: 44, width: { xs: "100%", md: "auto" } }}
+          >
+            {isEvaluating ? "Evaluating..." : "Evaluate"}
           </Button>
         </Grid>
       </Grid>

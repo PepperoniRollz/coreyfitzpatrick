@@ -5,10 +5,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Typography, Box } from "@mui/material";
 
 type RouleteResultsProps = {
   results: MartingaleResults;
   startingStack: Number;
+  hasRun: boolean;
 };
 
 type MartingaleResults = {
@@ -25,7 +27,18 @@ type MartingaleResults = {
 const RouletteTable = ({
   results,
   startingStack,
+  hasRun,
 }: RouleteResultsProps): JSX.Element => {
+  if (!hasRun) {
+    return (
+      <Box sx={{ py: 4, textAlign: "center" }}>
+        <Typography variant="body1" color="text.secondary">
+          Run a simulation to see results
+        </Typography>
+      </Box>
+    );
+  }
+
   const statistics = [
     { key: "Goal Probability", value: results.chanceOfSuccess.toFixed(2) },
     { key: "Avg Bet", value: `$${results.averageBet.toFixed(2)}` },

@@ -15,6 +15,7 @@ type CardDialogProps = {
   selectedBoardCards: string[];
   selectedDeadCards: string[];
   handleCardClick: (cardId: string, type: string) => void;
+  title?: string;
 };
 
 const CardDialog = ({
@@ -25,10 +26,11 @@ const CardDialog = ({
   handleCardClick,
   selectedBoardCards,
   selectedDeadCards,
+  title = "Select Options",
 }: CardDialogProps) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="lg">
-      <DialogTitle>Select Options</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <CardSelector
           selectedPlayer={selectedPlayer}

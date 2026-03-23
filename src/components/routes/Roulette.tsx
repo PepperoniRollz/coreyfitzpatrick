@@ -68,6 +68,8 @@ const Roulette = (): JSX.Element => {
   const [chartData, setChartData] = useState<ChartData>({ series: [] });
   const [odds, setOdds] = useState<number>(0.474);
   const [payout, setPayout] = useState(2);
+  const [isRunning, setIsRunning] = useState(false);
+  const [hasRun, setHasRun] = useState(false);
   const [results, setResults] = useState<MartingaleResults>({
     chanceOfSuccess: 0,
     avgToSuccess: 0,
@@ -118,7 +120,7 @@ const Roulette = (): JSX.Element => {
     const betTimesSuccess = [];
     const betTimesFailure = [];
     const simData = new Map<number, number[]>();
-    const n = inputData.iterations;
+    const n = Math.min(inputData.iterations, 500);
 
     for (let i = 0; i < n; i++) {
       let bet = inputData.firstBet;
@@ -127,7 +129,7 @@ const Roulette = (): JSX.Element => {
       if (simData.get(numBets)) {
         simData.get(numBets)![i] = stack;
       } else {
-        simData.set(numBets, new Array(inputData.iterations));
+        simData.set(numBets, new Array(n));
       }
       if (i === 0) {
         simData.get(numBets)![i] = stack;
@@ -158,7 +160,7 @@ const Roulette = (): JSX.Element => {
         if (simData.get(numBets)) {
           simData.get(numBets)![i] = stack;
         } else {
-          simData.set(numBets, new Array(inputData.iterations));
+          simData.set(numBets, new Array(n));
           simData.get(numBets)![i] = stack;
         }
 
@@ -188,7 +190,7 @@ const Roulette = (): JSX.Element => {
       }
     }
 
-    const cData = transformToChartData(inputData, simData);
+    const cData = transformToChartData({ ...inputData, iterations: n }, simData);
     const finalRow: number[] = cData.series[cData.series.length - 1].slice(
       1
     ) as number[];
@@ -280,7 +282,7 @@ const Roulette = (): JSX.Element => {
         >
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Odds</InputLabel>
-            <Select label="Odds" onChange={handleOddsChange} displayEmpty>
+            <Select label="Odds" onChange={handleOddsChange} value={String(odds)} defaultValue="0.474">
               <MenuItem value={0.474}>
                 1:1 47.37% 18 Numbers (Red/Black/Odd/Even/High/Low) (American)
               </MenuItem>
@@ -337,7 +339,7 @@ const Roulette = (): JSX.Element => {
           spacing={2}
           sx={{ px: responsiveMarginX }}
         >
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <Grid item paddingBottom={"10px"}>
               <TextField
                 type="number"
@@ -380,9 +382,7 @@ const Roulette = (): JSX.Element => {
                 }
               ></TextField>
             </Grid>
-          </Grid>
-          <Grid item xs={12} md={4} paddingBottom={"10px"}>
-            <Grid item>
+            <Grid item paddingBottom={"10px"}>
               <TextField
                 type="number"
                 label="max bet"
@@ -395,20 +395,22 @@ const Roulette = (): JSX.Element => {
                   })
                 }
               ></TextField>
-              <Grid item paddingBottom={"10px"}>
-                <TextField
-                  type="number"
-                  label="goal"
-                  defaultValue={2000}
-                  fullWidth
-                  onChange={(e) =>
-                    setInputData({
-                      ...inputData,
-                      goal: Number(e.target.value),
-                    })
-                  }
-                ></TextField>
-              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Grid item paddingBottom={"10px"}>
+              <TextField
+                type="number"
+                label="goal"
+                defaultValue={2000}
+                fullWidth
+                onChange={(e) =>
+                  setInputData({
+                    ...inputData,
+                    goal: Number(e.target.value),
+                  })
+                }
+              ></TextField>
             </Grid>
             <Grid item paddingBottom={"10px"}>
               <TextField
@@ -416,6 +418,7 @@ const Roulette = (): JSX.Element => {
                 label="iterations"
                 defaultValue={100}
                 fullWidth
+                inputProps={{ max: 500 }}
                 onChange={(e) =>
                   setInputData({
                     ...inputData,
@@ -431,6 +434,7 @@ const Roulette = (): JSX.Element => {
                   label="spins"
                   defaultValue={200}
                   fullWidth
+                  inputProps={{ max: 10000 }}
                   onChange={(e) =>
                     setInputData({
                       ...inputData,
@@ -440,49 +444,60 @@ const Roulette = (): JSX.Element => {
                 ></TextField>
               </Grid>
             )}
+            <Grid item paddingBottom={"10px"}>
+              <FormControl>
+                <RadioGroup
+                  style={{ justifyContent: "center" }}
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  defaultValue="until spins"
+                >
+                  <FormControlLabel
+                    value="until broke"
+                    control={<Radio />}
+                    label="Until bankrupt"
+                    onChange={() => handleRunUntilBroke()}
+                    sx={{ minHeight: 44 }}
+                  />
+                  <FormControlLabel
+                    value="until goal"
+                    control={<Radio />}
+                    label="Until goal or bankrupt"
+                    onChange={() => handleRunUntilGoal()}
+                    sx={{ minHeight: 44 }}
+                  />
+                  <FormControlLabel
+                    value="until spins"
+                    control={<Radio />}
+                    label="Fixed number of spins"
+                    onChange={() => handleSpins()}
+                    sx={{ minHeight: 44 }}
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={4} paddingBottom={"10px"}>
-            <FormControl>
-              <RadioGroup
-                style={{ justifyContent: "center" }}
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                defaultValue="until spins"
+          <Grid item xs={12} md={12} sx={{ display: "flex", justifyContent: "center" }}>
+            <Box sx={{ width: "100%", maxWidth: 400 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                fullWidth
+                disabled={isRunning}
+                sx={{ minHeight: 44 }}
+                onClick={() => {
+                  setIsRunning(true);
+                  setTimeout(() => {
+                    martingale(inputData);
+                    setHasRun(true);
+                    setIsRunning(false);
+                  }, 50);
+                }}
               >
-                <FormControlLabel
-                  value="until broke"
-                  control={<Radio />}
-                  label="Run until bankroll is depleted"
-                  onChange={() => handleRunUntilBroke()}
-                  sx={{ minHeight: 44 }}
-                />
-                <FormControlLabel
-                  value="until goal"
-                  control={<Radio />}
-                  label="Run until goal OR bankroll is depleted"
-                  onChange={() => handleRunUntilGoal()}
-                  sx={{ minHeight: 44 }}
-                />
-                <FormControlLabel
-                  value="until spins"
-                  control={<Radio />}
-                  label="Run for a fixed number of spins of the wheel"
-                  onChange={() => handleSpins()}
-                  sx={{ minHeight: 44 }}
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <Button
-              variant="contained"
-              sx={{ minHeight: 44 }}
-              onClick={() => {
-                martingale(inputData);
-              }}
-            >
-              Go!
-            </Button>
+                {isRunning ? "Running..." : "Run Simulation"}
+              </Button>
+            </Box>
           </Grid>
           <Grid
             item
@@ -499,6 +514,7 @@ const Roulette = (): JSX.Element => {
             <RouletteTable
               results={results}
               startingStack={inputData.startingStack}
+              hasRun={hasRun}
             />
           </Grid>
           {chartData.series.length > 0 && (
