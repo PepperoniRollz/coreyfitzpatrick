@@ -26,14 +26,16 @@ function Footer() {
           <IconButton
             href="https://www.linkedin.com/in/corey-fitzpatrick-44b53876/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <LinkedInIcon
               sx={{ fontSize: 50, display: { xs: "none", md: "flex" }, mr: 1 }}
             />
           </IconButton>
           <IconButton
-            href="http://www.github.com/pepperonirollz"
+            href="https://www.github.com/pepperonirollz"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <GitHubIcon
               sx={{ fontSize: 50, display: { xs: "none", md: "flex" }, mr: 1 }}

@@ -39,7 +39,7 @@ function Poker() {
   const [open, setOpen] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState(0);
   const [playerFieldValues, setPlayerFieldValues] = useState<PlayerFieldData[]>(
-    new Array(12).fill({ cards: "", equity: 0 })
+    Array.from({ length: 12 }, () => ({ cards: "", equity: 0 }))
   );
   const [boardFieldValues, setBoardFieldValues] = useState<string[]>([]);
 
@@ -70,7 +70,7 @@ function Poker() {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const newValues = [...deadCardsFieldValues];
-    // newValues[selectedPlayer] = event.target.value;
+    newValues[selectedPlayer] = event.target.value;
     setDeadCardsFieldValues(newValues);
   };
 
@@ -79,64 +79,63 @@ function Poker() {
   //================================================================================================
 
   useEffect(() => {
-    const newValues = [...playerFieldValues];
-
-    // newValues[selectedPlayer] = selectedCards.join("");
-    newValues[selectedPlayer] = {
-      cards: selectedPlayerCards.join(""),
-      equity: 0,
-    };
-
-    // setTextFieldValues(newValues);
-    setPlayerFieldValues(newValues);
-  }, [selectedPlayerCards]);
+    setPlayerFieldValues((prev) => {
+      const newValues = [...prev];
+      newValues[selectedPlayer] = {
+        cards: selectedPlayerCards.join(""),
+        equity: 0,
+      };
+      return newValues;
+    });
+  }, [selectedPlayerCards, selectedPlayer]);
 
   useEffect(() => {
-    const newValues = [...boardFieldValues];
-    // newValues[selectedPlayer] = selectedBoardCards.join("");
-    setBoardFieldValues(newValues);
-  }, [selectedBoardCards]);
+    setBoardFieldValues((prev) => {
+      const newValues = [...prev];
+      newValues[selectedPlayer] = selectedBoardCards.join("");
+      return newValues;
+    });
+  }, [selectedBoardCards, selectedPlayer]);
 
   useEffect(() => {
-    const newValues = [...deadCardsFieldValues];
-    // newValues[selectedPlayer] = selectedDeadCards.join("");
-    setDeadCardsFieldValues(newValues);
-  }, [selectedDeadCards]);
+    setDeadCardsFieldValues((prev) => {
+      const newValues = [...prev];
+      newValues[selectedPlayer] = selectedDeadCards.join("");
+      return newValues;
+    });
+  }, [selectedDeadCards, selectedPlayer]);
 
   useEffect(() => {
-    const newValues = [...playerFieldValues];
-    equityEvaluation.equities &&
-      newValues.forEach((player, index) => {
-        player.equity = equityEvaluation.equities.Equities[index];
-      });
-    setPlayerFieldValues(newValues);
+    setPlayerFieldValues((prev) =>
+      prev.map((player, index) => ({
+        ...player,
+        equity: equityEvaluation.equities
+          ? equityEvaluation.equities.Equities[index]
+          : player.equity,
+      }))
+    );
   }, [equityEvaluation]);
 
   const convertToCards = (
     playerCards: string[]
   ): { Players: CardSet[]; Board: CardSet } => {
     const players: CardSet[] = [];
-    console.log("boardfieldvalues", boardFieldValues);
     const boardCards = new CardSet(selectedBoardCards.join(""));
     playerCards.forEach((cards) => {
       if (cards.length === 4) {
         players.push(new CardSet(cards));
       }
     });
-    console.log("ABOUT TO SEND THIS", { players, boardCards });
     return { Players: players, Board: boardCards };
   };
-  console.log("playerfieldvales", playerFieldValues);
   const handlePost = () => {
     // console.log(PlayingCardsList);
     const { Players, Board } = convertToCards(
       playerFieldValues.map((p) => p.cards)
     );
-    console.log("players", Players);
-    console.log("board", Board);
-
-    fetch("http://ec2-3-85-15-107.compute-1.amazonaws.com:8080/api/equity", {
+    fetch("https://ec2-3-85-15-107.compute-1.amazonaws.com:8080/api/equity", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         Players: Players,
         Board: Board,
@@ -149,7 +148,6 @@ function Poker() {
         return Promise.reject(response);
       })
       .then(function (data) {
-        console.log(data);
         setEquityEvaluation(data);
       })
       .catch(function (error) {
@@ -172,7 +170,6 @@ function Poker() {
       });
     } else if (selectedPlayer === 12) {
       setSelectedDeadCards((prevSelected) => {
-        console.log("dead card selector clicked");
         if (prevSelected.includes(cardId)) {
           // Deselect if already selected
           return prevSelected.filter((id) => id !== cardId);
@@ -180,12 +177,11 @@ function Poker() {
           return [...prevSelected, cardId];
         } else {
           // Replace the oldest selection with the new one
-          return [prevSelected[1], cardId];
+          return [...prevSelected.slice(1), cardId];
         }
       });
     } else {
       setSelectedPlayerCards((prevSelected) => {
-        console.log("player card selector clicked", cardId, prevSelected);
         if (prevSelected.includes(cardId)) {
           // Deselect if already selected
           return prevSelected.filter((id) => id !== cardId);
@@ -193,7 +189,7 @@ function Poker() {
           return [...prevSelected, cardId];
         } else {
           // Replace the oldest selection with the new one
-          return [prevSelected[1], cardId];
+          return [...prevSelected.slice(1), cardId];
         }
       });
     }

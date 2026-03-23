@@ -18,7 +18,6 @@ export default function SuitRow({
   selectedBoardCards,
   selectedDeadCards,
 }: SuitRowProps) {
-  console.log("selectedPlayer", selectedPlayer);
   const cards = [
     "A",
     "K",

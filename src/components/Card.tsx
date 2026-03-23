@@ -1,4 +1,3 @@
-import { StringifyOptions } from "querystring";
 import React from "react";
 import playingCardsList from "../utils/svgImporter";
 
@@ -71,7 +70,10 @@ export default class Card {
   constructor(s: string) {
     // console.log(s);
 
-    this.value = cardCodes.get(s) || 0;
+    const rank = s.length >= 1 ? s[0] : "";
+    const suit = s.length >= 2 ? s[1].toLowerCase() : "";
+    const normalized = rank + suit;
+    this.value = cardCodes.get(normalized) || 0;
     this.card = s;
   }
 }

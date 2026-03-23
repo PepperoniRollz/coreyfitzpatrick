@@ -79,54 +79,61 @@ const RandomWalk: React.FC<RandomWalkProps> = ({
 
     setStepsTaken(0); // Reset steps taken
 
+    if (!isWalking) return;
+
+    let animationFrameId: number;
+    const stepsPerFrame = 10;
+
     const draw = () => {
-      console.log(numSteps, stepsTaken);
+      for (let i = 0; i < stepsPerFrame; i++) {
+        if (stepsTakenRef.current >= numSteps) {
+          return;
+        }
+        const index = Math.floor(Math.random() * directions.length);
+        const { dx, dy } = directions[index];
 
-      if (stepsTakenRef.current >= numSteps) {
-        clearInterval(intervalId);
-        return;
+        const newX = Math.max(Math.min(x + dx, width), 0);
+        const newY = Math.max(Math.min(y + dy, height), 0);
+
+        const posKey = `${newX},${newY}`;
+        visitCountRef.current[posKey] =
+          (visitCountRef.current[posKey] || 0) + 1;
+        const visits = visitCountRef.current[posKey];
+
+        // Adjust line color based on visits (darker with more visits)
+        const colorIntensity = Math.min(255, visits * 10); // Cap intensity to 255
+        context.strokeStyle = `rgb(${colorIntensity}, ${colorIntensity}, ${colorIntensity})`;
+
+        context.beginPath();
+        context.moveTo(x, y);
+        context.lineTo(newX, newY);
+        context.stroke();
+
+        x = newX;
+        y = newY;
+
+        // Check if reached the end point and stop if so
+        if (
+          endPoint &&
+          Math.abs(x - endPoint.x) < stepSize &&
+          Math.abs(y - endPoint.y) < stepSize
+        ) {
+          setIsWalking(false);
+          setStepsTaken(stepsTakenRef.current);
+          return;
+        }
+        stepsTakenRef.current += 1;
       }
-      const index = Math.floor(Math.random() * directions.length);
-      const { dx, dy } = directions[index];
 
-      const newX = Math.max(Math.min(x + dx, width), 0);
-      const newY = Math.max(Math.min(y + dy, height), 0);
-
-      const posKey = `${newX},${newY}`;
-      visitCountRef.current[posKey] = (visitCountRef.current[posKey] || 0) + 1;
-      const visits = visitCountRef.current[posKey];
-
-      // Adjust line color based on visits (darker with more visits)
-      const colorIntensity = Math.min(255, visits * 10); // Cap intensity to 255
-      context.strokeStyle = `rgb(${colorIntensity}, ${colorIntensity}, ${colorIntensity})`;
-
-      context.beginPath();
-      context.moveTo(x, y);
-      context.lineTo(newX, newY);
-      context.stroke();
-
-      x = newX;
-      y = newY;
-
-      // Check if reached the end point and stop if so
-      if (
-        endPoint &&
-        Math.abs(x - endPoint.x) < stepSize &&
-        Math.abs(y - endPoint.y) < stepSize
-      ) {
-        setIsWalking(false);
-      }
-      stepsTakenRef.current += 1;
-
-      setStepsTaken((prevSteps) => prevSteps + 1);
+      setStepsTaken(stepsTakenRef.current);
+      animationFrameId = requestAnimationFrame(draw);
     };
 
-    const intervalId = setInterval(draw, 1);
-
     drawAxes(context);
+    animationFrameId = requestAnimationFrame(draw);
 
-    return () => clearInterval(intervalId);
-  }, [width, height, stepSize, endPoint, isWalking]);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [width, height, stepSize, endPoint, isWalking, numSteps]);
 
   return (
     <>

@@ -17,7 +17,6 @@ function Header() {
         <Toolbar disableGutters>
           <CasinoIcon
             sx={{ fontSize: 60, display: { xs: "none", md: "flex" }, mr: 1 }}
-            to="/coreyfitzpatrick"
           />
           <Typography
             variant="h6"
@@ -37,11 +36,18 @@ function Header() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            {pages.map((page) => (
-              <MenuItem key={page}>
-                <Typography textAlign="center">{page}</Typography>
-              </MenuItem>
-            ))}
+            <MenuItem component={RouterLink} to="/aboutme" key="About Me">
+              <Typography textAlign="center">About Me</Typography>
+            </MenuItem>
+            <MenuItem component={RouterLink} to="/projects" key="Projects">
+              <Typography textAlign="center">Projects</Typography>
+            </MenuItem>
+            <MenuItem component={RouterLink} to="/poker" key="Poker">
+              <Typography textAlign="center">Poker</Typography>
+            </MenuItem>
+            <MenuItem component={RouterLink} to="/roulette" key="Roulette">
+              <Typography textAlign="center">Roulette</Typography>
+            </MenuItem>
           </Box>
           <Typography
             variant="h5"

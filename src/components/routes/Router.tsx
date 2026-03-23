@@ -7,7 +7,6 @@ import Home from "./Home";
 import Poker from "./Poker";
 import Roulette from "./Roulette";
 import Resume from "./Resume";
-import BitTester from "./BitTester";
 import RandomWalk from "./RandomWalk";
 
 const router = createBrowserRouter([

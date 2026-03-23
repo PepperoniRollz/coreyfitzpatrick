@@ -134,8 +134,7 @@ const Roulette = (): JSX.Element => {
       }
 
       while (
-        stack > 0 ||
-        (stack > 0 && runSpins && numBets < inputData.spins)
+        stack > 0 && (!runSpins || numBets < inputData.spins)
       ) {
         if (stack - bet < 0) {
           bet = stack;
@@ -245,8 +244,6 @@ const Roulette = (): JSX.Element => {
     }
     return transformedArray;
   };
-
-  console.log(odds);
 
   return (
     <>

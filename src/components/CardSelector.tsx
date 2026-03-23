@@ -17,8 +17,6 @@ const CardsDisplay = ({
 }: CardsDisplayProps): JSX.Element => {
   const suits: string[] = ["C", "D", "H", "S"]; // Update as per your suit names
 
-  console.log(selectedPlayerCards);
-
   return (
     <Grid container spacing={2}>
       {suits.map((suit) => (
