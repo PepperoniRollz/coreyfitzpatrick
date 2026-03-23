@@ -1,13 +1,15 @@
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Contact from "../../components/routes/Contact";
-import AboutMe from "./AboutMe";
-import Projects from "../../components/routes/Projects";
 import Layout from "../Layout";
 import Home from "./Home";
-import Poker from "./Poker";
-import Roulette from "./Roulette";
-import Resume from "./Resume";
-import RandomWalk from "./RandomWalk";
+
+const AboutMe = lazy(() => import("./AboutMe"));
+const Contact = lazy(() => import("./Contact"));
+const Projects = lazy(() => import("./Projects"));
+const Poker = lazy(() => import("./Poker"));
+const Roulette = lazy(() => import("./Roulette"));
+const Resume = lazy(() => import("./Resume"));
+const RandomWalk = lazy(() => import("./RandomWalk"));
 
 const router = createBrowserRouter(
   [
