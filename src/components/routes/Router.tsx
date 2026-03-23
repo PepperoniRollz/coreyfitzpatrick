@@ -9,44 +9,49 @@ import Roulette from "./Roulette";
 import Resume from "./Resume";
 import RandomWalk from "./RandomWalk";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "contact",
+          element: <Contact />,
+        },
+        {
+          path: "aboutme",
+          element: <AboutMe />,
+        },
+        {
+          path: "resume",
+          element: <Resume />,
+        },
+        {
+          path: "projects",
+          element: <Projects />,
+        },
+        {
+          path: "poker",
+          element: <Poker />,
+        },
+        {
+          path: "roulette",
+          element: <Roulette />,
+        },
+        {
+          path: "randomwalk",
+          element: <RandomWalk />,
+        },
+      ],
+    },
+  ],
   {
-    element: <Layout />,
-    children: [
-      {
-        path: "/coreyfitzpatrick",
-        element: <Home />,
-      },
-      {
-        path: "contact",
-        element: <Contact />,
-      },
-      {
-        path: "aboutme",
-        element: <AboutMe />,
-      },
-      {
-        path: "resume",
-        element: <Resume />,
-      },
-      {
-        path: "projects",
-        element: <Projects />,
-      },
-      {
-        path: "poker",
-        element: <Poker />,
-      },
-      {
-        path: "roulette",
-        element: <Roulette />,
-      },
-      {
-        path: "randomwalk",
-        element: <RandomWalk />,
-      },
-    ],
-  },
-]);
+    basename: "/coreyfitzpatrick",
+  }
+);
 
 export default router;
