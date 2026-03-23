@@ -1,25 +1,18 @@
 type PlayingCardsList = { [key: string]: string };
-let suits = ["C", "D", "H", "S"];
-let faces = ["A", "T", "J", "Q", "K"];
 
-let addSuits = (i: string | number, playingCardsList: PlayingCardsList) => {
-  for (const suit of suits) {
-    playingCardsList[i + suit] = require("../images/cards/2color/" +
-      i +
-      suit +
-      ".svg");
-  }
-};
+const svgModules = import.meta.glob("../images/cards/2color/*.svg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
 
 let playingCardsList: PlayingCardsList = {};
 
-for (let i = 2; i < 10; i++) {
-  addSuits(i, playingCardsList);
+for (const [path, url] of Object.entries(svgModules)) {
+  const filename = path.split("/").pop()?.replace(".svg", "");
+  if (filename) {
+    playingCardsList[filename] = url;
+  }
 }
-
-for (const face of faces) {
-  addSuits(face, playingCardsList);
-}
-// console.log(playingCardsList);
 
 export default playingCardsList;
