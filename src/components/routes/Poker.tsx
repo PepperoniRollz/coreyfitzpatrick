@@ -129,7 +129,6 @@ function Poker() {
     return { Players: players, Board: boardCards };
   };
   const handlePost = () => {
-    // console.log(PlayingCardsList);
     const { Players, Board } = convertToCards(
       playerFieldValues.map((p) => p.cards)
     );
@@ -159,36 +158,30 @@ function Poker() {
     if (selectedPlayer === 11) {
       setSelectedBoardCards((prevSelected) => {
         if (prevSelected.includes(cardId)) {
-          // Deselect if already selected
           return prevSelected.filter((id) => id !== cardId);
         } else if (prevSelected.length < 4) {
           return [...prevSelected, cardId];
         } else {
-          // Replace the oldest selection with the new one
           return [...prevSelected.slice(1), cardId];
         }
       });
     } else if (selectedPlayer === 12) {
       setSelectedDeadCards((prevSelected) => {
         if (prevSelected.includes(cardId)) {
-          // Deselect if already selected
           return prevSelected.filter((id) => id !== cardId);
         } else if (prevSelected.length < 48) {
           return [...prevSelected, cardId];
         } else {
-          // Replace the oldest selection with the new one
           return [...prevSelected.slice(1), cardId];
         }
       });
     } else {
       setSelectedPlayerCards((prevSelected) => {
         if (prevSelected.includes(cardId)) {
-          // Deselect if already selected
           return prevSelected.filter((id) => id !== cardId);
         } else if (prevSelected.length < 2) {
           return [...prevSelected, cardId];
         } else {
-          // Replace the oldest selection with the new one
           return [...prevSelected.slice(1), cardId];
         }
       });
@@ -213,29 +206,35 @@ function Poker() {
         container
         spacing={5}
         paddingTop={"2%"}
-        height={"100vh"}
+        minHeight={"100vh"}
         paddingBottom={"2%"}
       >
-        <Box sx={{ width: "100%", marginTop: 2, marginX: 50 }}>
-          {/* Adjust the margin as needed */}
+        <Box sx={{ width: "100%", marginTop: 2, marginX: { xs: 2, sm: 4, md: 10, lg: 20 } }}>
           <Typography variant="h4" align="left" gutterBottom>
             {"Poker."}
           </Typography>
           <Divider sx={{ borderColor: "#000000" }} />
         </Box>
-        <Box sx={{ borderColor: "primary.main" }}>
-          <Grid item xs={12} marginLeft={50} marginRight={50}>
+        <Box sx={{ borderColor: "primary.main", width: "100%" }}>
+          <Grid item xs={12} sx={{ marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 }, marginRight: { xs: 2, sm: 4, md: 10, lg: 20 } }}>
             <Typography variant="body1" align={"left"}>
               An equity calculator for Texas Holdem. Enter player and board/dead
               cards to evaluate win equity. **Temporarily down to AWS costs**
             </Typography>
           </Grid>
         </Box>
-        <Grid item xs={12} marginLeft={50} marginRight={50}></Grid>
-        <Grid container spacing={2} marginX={50}>
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            marginX: { xs: 2, sm: 4, md: 10, lg: 20 },
+            mt: 2,
+            flexDirection: { xs: "column", md: "row" },
+          }}
+        >
           {/* ================================ Player Fields ================================ */}
 
-          <Grid item xs={8}>
+          <Grid item xs={12} md={8}>
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value, index) => (
               <PlayerFields
                 selectedPlayerCards={selectedPlayerCards}
@@ -249,46 +248,48 @@ function Poker() {
               />
             ))}
           </Grid>
-          <Grid item xs={4}>
-            <Grid container spacing={1} alignItems="center">
+          <Grid item xs={12} md={4}>
+            <Grid container spacing={1} alignItems="center" sx={{ mb: 1 }}>
               {/* ================================ Board Fields ================================ */}
 
-              <Grid item>
+              <Grid item xs="auto">
                 <Button
                   onClick={() => handleClickOpen(11)}
                   size="small"
-                  sx={{ color: "blue" }}
+                  sx={{ color: "blue", minWidth: 44, minHeight: 44 }}
                 >
                   Cards
-                </Button>{" "}
+                </Button>
               </Grid>
-              <Grid item>
+              <Grid item xs>
                 <TextField
                   size="small"
                   label={"Board"}
                   onChange={handleBoardTextChange}
                   value={selectedBoardCards.join("")}
+                  fullWidth
                 />
               </Grid>
-            </Grid>{" "}
+            </Grid>
             {/* ================================ dead cards ================================ */}
             <Grid container spacing={1} alignItems="center">
-              <Grid item>
+              <Grid item xs="auto">
                 <Button
                   onClick={() => handleClickOpen(12)}
                   size="small"
-                  sx={{ color: "blue" }}
+                  sx={{ color: "blue", minWidth: 44, minHeight: 44 }}
                 >
                   Cards
-                </Button>{" "}
+                </Button>
               </Grid>
 
-              <Grid item>
+              <Grid item xs>
                 <TextField
                   size="small"
                   label={"Dead Cards"}
                   onChange={handleDeadCardsTextChange}
                   value={selectedDeadCards.join("")}
+                  fullWidth
                 />
               </Grid>
             </Grid>
@@ -303,8 +304,8 @@ function Poker() {
           selectedDeadCards={selectedDeadCards}
           handleCardClick={handleCardClick}
         />
-        <Grid item xs={12} marginLeft={50} marginRight={50}>
-          <Button variant="contained" onClick={handlePost}>
+        <Grid item xs={12} sx={{ marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 }, marginRight: { xs: 2, sm: 4, md: 10, lg: 20 } }}>
+          <Button variant="contained" onClick={handlePost} sx={{ minHeight: 44 }}>
             Evaluate
           </Button>
         </Grid>

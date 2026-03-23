@@ -43,7 +43,7 @@ function Projects(): JSX.Element {
                 title={"Poker Equity Calculator"}
                 description={`a simple poker equity calcuator that takes a player's cards, along with board cards, and evaluates the win equity that a player's hand has against the others.  
           The calcuations are computed using my version of the twoplustwo holdem hand evaluator on a custom server hosted on an AWS EC2 instance.`}
-                url={"/Poker"}
+                url={"/poker"}
                 img={poker}
               ></ProjectCard>
             </Grid>
@@ -52,7 +52,7 @@ function Projects(): JSX.Element {
                 title={"Martingale Roulette Evaluation"}
                 description={`A calcuator that evaluates the common casino game of roulette.  The user can input many values and evaluate their chances of reaching a certain goal threshold after 
               a number of spins, or see their chances of winning after a set number of spins.`}
-                url={"/Roulette"}
+                url={"/roulette"}
                 img={roulette}
               ></ProjectCard>
             </Grid>

@@ -6,8 +6,7 @@ function AboutMe(): JSX.Element {
   return (
     <>
       <Grid container paddingTop={5}>
-        <Box sx={{ width: "100%", marginBottom: 2, marginX: 50 }}>
-          {/* Adjust the margin as needed */}
+        <Box sx={{ width: "100%", marginBottom: 2, marginX: { xs: 2, sm: 4, md: 10, lg: 20 } }}>
           <Typography variant="h4" align="left" gutterBottom>
             {"About."}
           </Typography>
@@ -16,13 +15,14 @@ function AboutMe(): JSX.Element {
         <Grid
           container
           spacing={2}
-          marginLeft={50}
-          marginRight={50}
-          marginTop={10}
-          // bgcolor={"#189AB4"}
+          sx={{
+            marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 },
+            marginRight: { xs: 2, sm: 4, md: 10, lg: 20 },
+            marginTop: { xs: 4, md: 10 },
+            flexDirection: { xs: "column", md: "row" },
+          }}
         >
           <Grid item xs={12} sm={6} md={4}>
-            {" "}
             <img
               src={games}
               alt="games"
@@ -33,7 +33,8 @@ function AboutMe(): JSX.Element {
             <Typography
               variant="h5"
               align={"left"}
-              fontFamily={"sans-serif" || "monospace"}
+              fontFamily={"sans-serif"}
+              sx={{ fontSize: { xs: "1.1rem", md: "1.5rem" } }}
             >
               Games, probability, math, puzzles, and statistics have always been
               an interest of mine. What better thing to do than to combine all
@@ -44,26 +45,27 @@ function AboutMe(): JSX.Element {
         <Grid
           container
           spacing={2}
-          marginLeft={50}
-          marginRight={50}
-          marginTop={10}
-          marginBottom={10}
-          // bgcolor={"#D4F1F4"}
+          sx={{
+            marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 },
+            marginRight: { xs: 2, sm: 4, md: 10, lg: 20 },
+            marginTop: { xs: 4, md: 10 },
+            marginBottom: { xs: 4, md: 10 },
+            flexDirection: { xs: "column-reverse", md: "row" },
+          }}
           borderRadius={"15px"}
         >
           <Grid item xs={12} md={6}>
             <Typography
               variant="h5"
               align={"left"}
-              fontFamily={"sans-serif" || "monospace"}
+              fontFamily={"sans-serif"}
+              sx={{ fontSize: { xs: "1.1rem", md: "1.5rem" } }}
             >
               This website is a work in progress. I am using it as a way to
               combine some personal interests and passion for programming.
-            </Typography>{" "}
+            </Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            {" "}
-            {/* Adjust grid sizing as needed */}
             <img
               src={programming}
               alt="programming"
@@ -74,14 +76,16 @@ function AboutMe(): JSX.Element {
         <Grid container bgcolor={"#023047"} paddingTop={5}>
           <Grid
             item
-            marginLeft={50}
-            marginRight={50}
-            marginTop={10}
-            marginBottom={20}
+            sx={{
+              marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 },
+              marginRight: { xs: 2, sm: 4, md: 10, lg: 20 },
+              marginTop: { xs: 4, md: 10 },
+              marginBottom: { xs: 8, md: 20 },
+            }}
           >
-            <Typography variant="h4" color={"white"}>
+            <Typography variant="h4" color={"white"} sx={{ fontSize: { xs: "1.3rem", md: "2.125rem" } }}>
               "In the beginning the Universe was created. This has made a lot of
-              people very angry and been widely regarded as a bad move.” <br />
+              people very angry and been widely regarded as a bad move." <br />
               -Douglas Adams
             </Typography>
           </Grid>
@@ -92,5 +96,3 @@ function AboutMe(): JSX.Element {
 }
 
 export default AboutMe;
-
-//#219EBC

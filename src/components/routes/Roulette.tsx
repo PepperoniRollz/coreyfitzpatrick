@@ -138,8 +138,6 @@ const Roulette = (): JSX.Element => {
       ) {
         if (stack - bet < 0) {
           bet = stack;
-          // } else if (stack - bet < 0 && runSpins) {
-          //   bet = inputData.firstBet;
         }
         if (bet > inputData.maxBet) {
           bet = inputData.maxBet;
@@ -245,18 +243,19 @@ const Roulette = (): JSX.Element => {
     return transformedArray;
   };
 
+  const responsiveMarginX = { xs: 2, sm: 4, md: 10, lg: 20 };
+
   return (
     <>
       <Grid container spacing={5} paddingTop={"2%"}>
-        <Box sx={{ width: "100%", marginTop: 2, marginX: 50 }}>
-          {/* Adjust the margin as needed */}
+        <Box sx={{ width: "100%", marginTop: 2, marginX: responsiveMarginX }}>
           <Typography variant="h4" align="left" gutterBottom>
             {"Roulette Martingale Strategy."}
           </Typography>
           <Divider sx={{ borderColor: "#000000" }} />
         </Box>
-        <Box sx={{ borderColor: "primary.main" }}>
-          <Grid item xs={12} marginLeft={50} marginRight={50}>
+        <Box sx={{ borderColor: "primary.main", width: "100%" }}>
+          <Grid item xs={12} sx={{ marginLeft: responsiveMarginX, marginRight: responsiveMarginX }}>
             <Typography variant="body1" align={"left"}>
               The Martingale system is a betting strategy that has been around
               since the 18th century. The idea is to double your bet after every
@@ -273,8 +272,10 @@ const Roulette = (): JSX.Element => {
           item
           xs={12}
           md={12}
-          marginLeft={50}
-          marginRight={50}
+          sx={{
+            marginLeft: responsiveMarginX,
+            marginRight: responsiveMarginX,
+          }}
           paddingBottom={"10px"}
         >
           <FormControl fullWidth>
@@ -333,16 +334,16 @@ const Roulette = (): JSX.Element => {
         </Grid>
         <Grid
           container
-          spacing={2} // Reduce this value to bring columns closer
-          sx={{ px: 50 }} // Sets left and right padding (5 * theme spacing unit)
+          spacing={2}
+          sx={{ px: responsiveMarginX }}
         >
-          {" "}
           <Grid item xs={12} md={4}>
             <Grid item paddingBottom={"10px"}>
               <TextField
                 type="number"
                 label="starting stack"
                 defaultValue={1000}
+                fullWidth
                 onChange={(e) =>
                   setInputData({
                     ...inputData,
@@ -356,6 +357,7 @@ const Roulette = (): JSX.Element => {
                 type="number"
                 label="first bet"
                 defaultValue={20}
+                fullWidth
                 onChange={(e) =>
                   setInputData({
                     ...inputData,
@@ -369,6 +371,7 @@ const Roulette = (): JSX.Element => {
                 type="number"
                 label="minimum bet"
                 defaultValue={20}
+                fullWidth
                 onChange={(e) =>
                   setInputData({
                     ...inputData,
@@ -384,6 +387,7 @@ const Roulette = (): JSX.Element => {
                 type="number"
                 label="max bet"
                 defaultValue={20000}
+                fullWidth
                 onChange={(e) =>
                   setInputData({
                     ...inputData,
@@ -396,6 +400,7 @@ const Roulette = (): JSX.Element => {
                   type="number"
                   label="goal"
                   defaultValue={2000}
+                  fullWidth
                   onChange={(e) =>
                     setInputData({
                       ...inputData,
@@ -410,6 +415,7 @@ const Roulette = (): JSX.Element => {
                 type="number"
                 label="iterations"
                 defaultValue={100}
+                fullWidth
                 onChange={(e) =>
                   setInputData({
                     ...inputData,
@@ -424,6 +430,7 @@ const Roulette = (): JSX.Element => {
                   type="number"
                   label="spins"
                   defaultValue={200}
+                  fullWidth
                   onChange={(e) =>
                     setInputData({
                       ...inputData,
@@ -447,18 +454,21 @@ const Roulette = (): JSX.Element => {
                   control={<Radio />}
                   label="Run until bankroll is depleted"
                   onChange={() => handleRunUntilBroke()}
+                  sx={{ minHeight: 44 }}
                 />
                 <FormControlLabel
                   value="until goal"
                   control={<Radio />}
                   label="Run until goal OR bankroll is depleted"
                   onChange={() => handleRunUntilGoal()}
+                  sx={{ minHeight: 44 }}
                 />
                 <FormControlLabel
                   value="until spins"
                   control={<Radio />}
                   label="Run for a fixed number of spins of the wheel"
                   onChange={() => handleSpins()}
+                  sx={{ minHeight: 44 }}
                 />
               </RadioGroup>
             </FormControl>
@@ -466,6 +476,7 @@ const Roulette = (): JSX.Element => {
           <Grid item xs={12} md={12}>
             <Button
               variant="contained"
+              sx={{ minHeight: 44 }}
               onClick={() => {
                 martingale(inputData);
               }}
@@ -482,20 +493,24 @@ const Roulette = (): JSX.Element => {
               justifyContent: "center",
               alignItems: "center",
               maxHeight: "50%",
+              overflowX: "auto",
             }}
           >
-            {/* <RouletteResults results={results} inputData={inputData} /> */}
             <RouletteTable
               results={results}
               startingStack={inputData.startingStack}
             />
           </Grid>
-          <Grid item xs={12}>
-            <RouletteChart series={chartData.series} />
-          </Grid>
-          <Grid item marginBottom={"75px"} xs={12}>
-            <RouletteHistogram series={chartData.series} />
-          </Grid>
+          {chartData.series.length > 0 && (
+            <Grid item xs={12} sx={{ overflowX: "auto" }}>
+              <RouletteChart series={chartData.series} />
+            </Grid>
+          )}
+          {chartData.series.length > 0 && (
+            <Grid item marginBottom={"75px"} xs={12} sx={{ overflowX: "auto" }}>
+              <RouletteHistogram series={chartData.series} />
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </>

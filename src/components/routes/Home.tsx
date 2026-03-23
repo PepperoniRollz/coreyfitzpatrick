@@ -22,15 +22,26 @@ function Home(): JSX.Element {
           container
           alignItems={"center"}
           justifyContent={"center"}
-          sx={{ height: "100%" }}
+          sx={{ height: "100%", px: { xs: 2, md: 0 } }}
         >
           <Grid item>
-            <Typography variant="h1" color={"#e1ad01"} fontSize={100}>
+            <Typography
+              variant="h1"
+              color={"#e1ad01"}
+              sx={{
+                fontSize: { xs: 40, sm: 60, md: 100 },
+                wordBreak: "break-word",
+              }}
+            >
               corey fitzpatrick.
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="subtitle1" color={"#D68840"} fontSize={33}>
+            <Typography
+              variant="subtitle1"
+              color={"#D68840"}
+              sx={{ fontSize: { xs: 16, sm: 22, md: 33 } }}
+            >
               I'm the dude playing the dude disguised as a programmer.
             </Typography>
           </Grid>
