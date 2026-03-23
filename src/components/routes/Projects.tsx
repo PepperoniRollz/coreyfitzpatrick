@@ -30,7 +30,7 @@ function Projects(): JSX.Element {
             alignItems="center"
           >
             <Grid item xs={12}>
-              <Typography variant="h4" align={"left"}>
+              <Typography variant="h4" align={"left"} sx={{ textShadow: "1px 1px 2px rgba(255,255,255,0.3)" }}>
                 Projects.
               </Typography>
             </Grid>

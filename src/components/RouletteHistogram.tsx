@@ -6,7 +6,7 @@ type ChartDataProps = {
 };
 
 const options = {
-  title: "Bankroll Peak Distribution Using MartinGale Strategy",
+  title: "Bankroll Peak Distribution Using Martingale Strategy",
   hAxis: {
     title: "Bankroll ($) Peak",
     minValue: 0,

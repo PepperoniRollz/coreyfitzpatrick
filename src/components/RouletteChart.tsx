@@ -5,7 +5,7 @@ type ChartDataProps = {
 };
 
 const options = {
-  title: "Bankroll Over Time Using MartinGale Strategy",
+  title: "Bankroll Over Time Using Martingale Strategy",
   hAxis: {
     title: "Count of Bets",
     minValue: 0,

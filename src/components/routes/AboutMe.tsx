@@ -12,67 +12,72 @@ function AboutMe(): JSX.Element {
           </Typography>
           <Divider sx={{ borderColor: "#000000" }} />
         </Box>
-        <Grid
-          container
-          spacing={2}
+        <Paper
+          elevation={2}
           sx={{
-            marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 },
-            marginRight: { xs: 2, sm: 4, md: 10, lg: 20 },
-            marginTop: { xs: 4, md: 10 },
-            flexDirection: { xs: "column", md: "row" },
-          }}
-        >
-          <Grid item xs={12} sm={6} md={4}>
-            <img
-              src={games}
-              alt="games"
-              style={{ width: "100%", height: "auto" }}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Typography
-              variant="h5"
-              align={"left"}
-              fontFamily={"sans-serif"}
-              sx={{ fontSize: { xs: "1.1rem", md: "1.5rem" } }}
-            >
-              Games, probability, math, puzzles, and statistics have always been
-              an interest of mine. What better thing to do than to combine all
-              them into a little website?
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          spacing={2}
-          sx={{
+            p: { xs: 2, md: 3 },
+            borderRadius: 2,
             marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 },
             marginRight: { xs: 2, sm: 4, md: 10, lg: 20 },
             marginTop: { xs: 4, md: 10 },
             marginBottom: { xs: 4, md: 10 },
-            flexDirection: { xs: "column-reverse", md: "row" },
           }}
-          borderRadius={"15px"}
         >
-          <Grid item xs={12} md={6}>
-            <Typography
-              variant="h5"
-              align={"left"}
-              fontFamily={"sans-serif"}
-              sx={{ fontSize: { xs: "1.1rem", md: "1.5rem" } }}
-            >
-              This website is a work in progress. I am using it as a way to
-              combine some personal interests and passion for programming.
-            </Typography>
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              flexDirection: { xs: "column", md: "row" },
+            }}
+          >
+            <Grid item xs={12} sm={6} md={4}>
+              <img
+                src={games}
+                alt="games"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography
+                variant="h5"
+                align={"left"}
+                fontFamily={"sans-serif"}
+                sx={{ fontSize: { xs: "1.1rem", md: "1.5rem" } }}
+              >
+                Games, probability, math, puzzles, and statistics have always been
+                an interest of mine. What better thing to do than to combine all
+                them into a little website?
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <img
-              src={programming}
-              alt="programming"
-              style={{ width: "100%", height: "auto" }}
-            />
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              marginTop: { xs: 4, md: 6 },
+              flexDirection: { xs: "column-reverse", md: "row" },
+            }}
+          >
+            <Grid item xs={12} md={6}>
+              <Typography
+                variant="h5"
+                align={"left"}
+                fontFamily={"sans-serif"}
+                sx={{ fontSize: { xs: "1.1rem", md: "1.5rem" } }}
+              >
+                This website is a work in progress. I am using it as a way to
+                combine some personal interests and passion for programming.
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <img
+                src={programming}
+                alt="programming"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </Grid>
           </Grid>
-        </Grid>
+        </Paper>
         <Grid container bgcolor={"#023047"} paddingTop={5}>
           <Grid
             item

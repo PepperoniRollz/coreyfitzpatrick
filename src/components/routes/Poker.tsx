@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import { CardSet } from "../../components/Card";
 import PlayerFields from "../PlayerFields";
-import { Divider, Grid, Typography } from "@mui/material";
+import { Divider, Grid, Paper, Typography } from "@mui/material";
 import CardDialog from "../CardDialog";
 
 interface EquityEvaluation {
@@ -221,124 +221,122 @@ function Poker() {
           </Typography>
           <Divider sx={{ borderColor: "#000000" }} />
         </Box>
-        <Box sx={{ borderColor: "primary.main", width: "100%" }}>
-          <Grid item xs={12} sx={{ marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 }, marginRight: { xs: 2, sm: 4, md: 10, lg: 20 } }}>
-            <Typography variant="body1" align={"left"}>
-              An equity calculator for Texas Holdem. Enter player and board/dead
-              cards to evaluate win equity. <strong>Temporarily down due to AWS costs</strong>
-            </Typography>
-          </Grid>
-        </Box>
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            marginX: { xs: 2, sm: 4, md: 10, lg: 20 },
-            mt: 2,
-            flexDirection: { xs: "column", md: "row" },
-          }}
-        >
-          {/* ================================ Player Fields ================================ */}
-
-          <Grid item xs={12} md={8}>
-            {Array.from({ length: numPlayers }, (_, index) => (
-              <PlayerFields
-                selectedPlayerCards={selectedPlayerCards}
-                handleClickOpen={handleClickOpen}
-                index={index}
-                key={index}
-                onTextChange={(e) => handlePlayerFieldChange(e)}
-                textValue={playerFieldValues[index].cards}
-                onFocus={() => setSelectedPlayer(index)}
-                equity={playerFieldValues[index].equity}
-              />
-            ))}
-            <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
-              {numPlayers < 10 && (
-                <Button size="small" onClick={() => setNumPlayers((n) => Math.min(n + 1, 10))}>
-                  + Add Player
-                </Button>
-              )}
-              {numPlayers > 2 && (
-                <Button size="small" color="error" onClick={() => setNumPlayers((n) => Math.max(n - 1, 2))}>
-                  - Remove
-                </Button>
-              )}
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Grid container spacing={1} alignItems="center" sx={{ mb: 1 }}>
-              {/* ================================ Board Fields ================================ */}
-
-              <Grid item xs="auto">
-                <Button
-                  onClick={() => handleClickOpen(11)}
-                  size="small"
-                  sx={{ color: "blue", minWidth: 44, minHeight: 44 }}
-                >
-                  Cards
-                </Button>
-              </Grid>
-              <Grid item xs>
-                <TextField
-                  size="small"
-                  label={"Board"}
-                  onChange={handleBoardTextChange}
-                  value={selectedBoardCards.join("")}
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-            {/* ================================ dead cards ================================ */}
-            <Grid container spacing={1} alignItems="center">
-              <Grid item xs="auto">
-                <Button
-                  onClick={() => handleClickOpen(12)}
-                  size="small"
-                  sx={{ color: "blue", minWidth: 44, minHeight: 44 }}
-                >
-                  Cards
-                </Button>
-              </Grid>
-
-              <Grid item xs>
-                <TextField
-                  size="small"
-                  label={"Dead Cards"}
-                  onChange={handleDeadCardsTextChange}
-                  value={selectedDeadCards.join("")}
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-        <CardDialog
-          open={open}
-          onClose={handleClose}
-          selectedPlayer={selectedPlayer}
-          selectedPlayerCards={selectedPlayerCards}
-          selectedBoardCards={selectedBoardCards}
-          selectedDeadCards={selectedDeadCards}
-          handleCardClick={handleCardClick}
-          title={
-            selectedPlayer === 11
-              ? "Select Board Cards"
-              : selectedPlayer === 12
-              ? "Select Dead Cards"
-              : `Select Cards for Player ${selectedPlayer + 1}`
-          }
-        />
-        <Grid item xs={12} sx={{ marginLeft: { xs: 2, sm: 4, md: 10, lg: 20 }, marginRight: { xs: 2, sm: 4, md: 10, lg: 20 }, textAlign: "center" }}>
-          <Button
-            variant="contained"
-            onClick={handlePost}
-            disabled={isEvaluating}
-            sx={{ minHeight: 44, width: { xs: "100%", md: "auto" } }}
+        <Paper elevation={2} sx={{ p: { xs: 2, md: 3 }, borderRadius: 2, marginX: { xs: 2, sm: 4, md: 10, lg: 20 }, width: "100%" }}>
+          <Typography variant="body1" align={"left"} sx={{ mb: 2 }}>
+            An equity calculator for Texas Holdem. Enter player and board/dead
+            cards to evaluate win equity. <strong>Temporarily down due to AWS costs</strong>
+          </Typography>
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              flexDirection: { xs: "column", md: "row" },
+            }}
           >
-            {isEvaluating ? "Evaluating..." : "Evaluate"}
-          </Button>
-        </Grid>
+            {/* ================================ Player Fields ================================ */}
+
+            <Grid item xs={12} md={8}>
+              {Array.from({ length: numPlayers }, (_, index) => (
+                <PlayerFields
+                  selectedPlayerCards={selectedPlayerCards}
+                  handleClickOpen={handleClickOpen}
+                  index={index}
+                  key={index}
+                  onTextChange={(e) => handlePlayerFieldChange(e)}
+                  textValue={playerFieldValues[index].cards}
+                  onFocus={() => setSelectedPlayer(index)}
+                  equity={playerFieldValues[index].equity}
+                />
+              ))}
+              <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
+                {numPlayers < 10 && (
+                  <Button size="small" onClick={() => setNumPlayers((n) => Math.min(n + 1, 10))}>
+                    + Add Player
+                  </Button>
+                )}
+                {numPlayers > 2 && (
+                  <Button size="small" color="error" onClick={() => setNumPlayers((n) => Math.max(n - 1, 2))}>
+                    - Remove
+                  </Button>
+                )}
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Grid container spacing={1} alignItems="center" sx={{ mb: 1 }}>
+                {/* ================================ Board Fields ================================ */}
+
+                <Grid item xs="auto">
+                  <Button
+                    onClick={() => handleClickOpen(11)}
+                    size="small"
+                    color="primary"
+                    sx={{ minWidth: 44, minHeight: 44 }}
+                  >
+                    Cards
+                  </Button>
+                </Grid>
+                <Grid item xs>
+                  <TextField
+                    size="small"
+                    label={"Board"}
+                    onChange={handleBoardTextChange}
+                    value={selectedBoardCards.join("")}
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
+              {/* ================================ dead cards ================================ */}
+              <Grid container spacing={1} alignItems="center">
+                <Grid item xs="auto">
+                  <Button
+                    onClick={() => handleClickOpen(12)}
+                    size="small"
+                    color="primary"
+                    sx={{ minWidth: 44, minHeight: 44 }}
+                  >
+                    Cards
+                  </Button>
+                </Grid>
+
+                <Grid item xs>
+                  <TextField
+                    size="small"
+                    label={"Dead Cards"}
+                    onChange={handleDeadCardsTextChange}
+                    value={selectedDeadCards.join("")}
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          <CardDialog
+            open={open}
+            onClose={handleClose}
+            selectedPlayer={selectedPlayer}
+            selectedPlayerCards={selectedPlayerCards}
+            selectedBoardCards={selectedBoardCards}
+            selectedDeadCards={selectedDeadCards}
+            handleCardClick={handleCardClick}
+            title={
+              selectedPlayer === 11
+                ? "Select Board Cards"
+                : selectedPlayer === 12
+                ? "Select Dead Cards"
+                : `Select Cards for Player ${selectedPlayer + 1}`
+            }
+          />
+          <Box sx={{ textAlign: "center", mt: 2 }}>
+            <Button
+              variant="contained"
+              onClick={handlePost}
+              disabled={isEvaluating}
+              sx={{ minHeight: 44, width: { xs: "100%", md: "auto" } }}
+            >
+              {isEvaluating ? "Evaluating..." : "Evaluate"}
+            </Button>
+          </Box>
+        </Paper>
       </Grid>
     </>
   );

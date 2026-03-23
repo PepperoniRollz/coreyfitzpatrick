@@ -12,6 +12,7 @@ import {
   SelectChangeEvent,
   TextField,
   Typography,
+  Paper,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
@@ -256,89 +257,76 @@ const Roulette = (): JSX.Element => {
           </Typography>
           <Divider sx={{ borderColor: "#000000" }} />
         </Box>
-        <Box sx={{ borderColor: "primary.main", width: "100%" }}>
-          <Grid item xs={12} sx={{ marginLeft: responsiveMarginX, marginRight: responsiveMarginX }}>
-            <Typography variant="body1" align={"left"}>
-              The Martingale system is a betting strategy that has been around
-              since the 18th century. The idea is to double your bet after every
-              loss until you win. Theoretically, this strategy will always net
-              you a win of your initial bet. However, in practice, there are a
-              few problems with this strategy. First, most casinos have a
-              maximum bet limit. Second, most people do not have an infinite
-              bankroll. This calculator will show you how long it will take to
-              reach your goal with the Martingale system.
-            </Typography>
-          </Grid>
-        </Box>
-        <Grid
-          item
-          xs={12}
-          md={12}
-          sx={{
-            marginLeft: responsiveMarginX,
-            marginRight: responsiveMarginX,
-          }}
-          paddingBottom={"10px"}
-        >
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Odds</InputLabel>
-            <Select label="Odds" onChange={handleOddsChange} value={String(odds)} defaultValue="0.474">
-              <MenuItem value={0.474}>
-                1:1 47.37% 18 Numbers (Red/Black/Odd/Even/High/Low) (American)
-              </MenuItem>
-              <MenuItem value={0.4865}>
-                1:1 48.65% 18 Numbers (Red/Black/Odd/Even/High/Low) (European)
-              </MenuItem>
-              <MenuItem value={0.3158}>
-                2:1 31.58% 12 Numbers (Column/Dozen) (American)
-              </MenuItem>
-              <MenuItem value={0.3243}>
-                2:1 32.43% 12 Numbers (Column/Dozen) (European)
-              </MenuItem>
-              <MenuItem value={0.1579}>
-                5:1 15.79% Six Numbers (American)
-              </MenuItem>
-              <MenuItem value={0.1621}>
-                5:1 16.21% Six Numbers (European)
-              </MenuItem>
-              <MenuItem value={0.1315}>
-                6:1 13.15% Five Numbers (American)
-              </MenuItem>
-              <MenuItem value={0.1351}>
-                6:1 13.51% Five Numbers (European)
-              </MenuItem>
-              <MenuItem value={0.1052}>
-                8:1 10.52% Four Numbers (American)
-              </MenuItem>
-              <MenuItem value={0.1081}>
-                8:1 10.81% Four Numbers (European)
-              </MenuItem>
-              <MenuItem value={0.0789}>
-                11:1 7.89% Three Numbers (American)
-              </MenuItem>
-              <MenuItem value={0.081}>
-                11:1 8.10% Three Numbers (European)
-              </MenuItem>
-              <MenuItem value={0.0526}>
-                17:1 5.26% Two Numbers (American)
-              </MenuItem>
-              <MenuItem value={0.054}>
-                17:1 5.40% Two Numbers (European)
-              </MenuItem>
-              <MenuItem value={0.0263}>
-                35:1 2.63% One Number (Straight Bet) (American)
-              </MenuItem>
-              <MenuItem value={0.027}>
-                35:1 2.70% One Number (Straight Bet) (European)
-              </MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid
-          container
-          spacing={2}
-          sx={{ px: responsiveMarginX }}
-        >
+        <Paper elevation={2} sx={{ p: { xs: 2, md: 3 }, borderRadius: 2, marginX: responsiveMarginX, width: "100%" }}>
+          <Typography variant="body1" align={"left"} sx={{ mb: 2 }}>
+            The Martingale system is a betting strategy that has been around
+            since the 18th century. The idea is to double your bet after every
+            loss until you win. Theoretically, this strategy will always net
+            you a win of your initial bet. However, in practice, there are a
+            few problems with this strategy. First, most casinos have a
+            maximum bet limit. Second, most people do not have an infinite
+            bankroll. This calculator will show you how long it will take to
+            reach your goal with the Martingale system.
+          </Typography>
+          <Box sx={{ mb: 2 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Odds</InputLabel>
+              <Select label="Odds" onChange={handleOddsChange} value={String(odds)} defaultValue="0.474">
+                <MenuItem value={0.474}>
+                  1:1 47.37% 18 Numbers (Red/Black/Odd/Even/High/Low) (American)
+                </MenuItem>
+                <MenuItem value={0.4865}>
+                  1:1 48.65% 18 Numbers (Red/Black/Odd/Even/High/Low) (European)
+                </MenuItem>
+                <MenuItem value={0.3158}>
+                  2:1 31.58% 12 Numbers (Column/Dozen) (American)
+                </MenuItem>
+                <MenuItem value={0.3243}>
+                  2:1 32.43% 12 Numbers (Column/Dozen) (European)
+                </MenuItem>
+                <MenuItem value={0.1579}>
+                  5:1 15.79% Six Numbers (American)
+                </MenuItem>
+                <MenuItem value={0.1621}>
+                  5:1 16.21% Six Numbers (European)
+                </MenuItem>
+                <MenuItem value={0.1315}>
+                  6:1 13.15% Five Numbers (American)
+                </MenuItem>
+                <MenuItem value={0.1351}>
+                  6:1 13.51% Five Numbers (European)
+                </MenuItem>
+                <MenuItem value={0.1052}>
+                  8:1 10.52% Four Numbers (American)
+                </MenuItem>
+                <MenuItem value={0.1081}>
+                  8:1 10.81% Four Numbers (European)
+                </MenuItem>
+                <MenuItem value={0.0789}>
+                  11:1 7.89% Three Numbers (American)
+                </MenuItem>
+                <MenuItem value={0.081}>
+                  11:1 8.10% Three Numbers (European)
+                </MenuItem>
+                <MenuItem value={0.0526}>
+                  17:1 5.26% Two Numbers (American)
+                </MenuItem>
+                <MenuItem value={0.054}>
+                  17:1 5.40% Two Numbers (European)
+                </MenuItem>
+                <MenuItem value={0.0263}>
+                  35:1 2.63% One Number (Straight Bet) (American)
+                </MenuItem>
+                <MenuItem value={0.027}>
+                  35:1 2.70% One Number (Straight Bet) (European)
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Grid
+            container
+            spacing={2}
+          >
           <Grid item xs={12} md={6}>
             <Grid item paddingBottom={"10px"}>
               <TextField
@@ -528,6 +516,7 @@ const Roulette = (): JSX.Element => {
             </Grid>
           )}
         </Grid>
+        </Paper>
       </Grid>
     </>
   );

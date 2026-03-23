@@ -29,6 +29,7 @@ const PlayerFields = ({
           onClick={() => handleClickOpen(index)}
           variant="outlined"
           size="small"
+          color="primary"
           sx={{ minWidth: 44, minHeight: 44 }}
         >
           Cards
