@@ -11,8 +11,18 @@
     />
     <link rel="apple-touch-icon" href="/coreyfitzpatrick/logo192.png" />
     <link rel="manifest" href="/coreyfitzpatrick/manifest.json" />
-    <title>React App</title>
-    <script type="module" crossorigin src="/coreyfitzpatrick/assets/index-BJkBW2_v.js"></script>
+    <title>Corey Fitzpatrick</title>
+    <script>
+      // Handle SPA redirect from 404.html
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/coreyfitzpatrick/assets/index-AJEr6qiv.js"></script>
     <link rel="stylesheet" crossorigin href="/coreyfitzpatrick/assets/index-BgUjdsM6.css">
   </head>
   <body>
